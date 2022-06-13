@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Ultimate Math Quiz</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <style>
+        .div {
+            float: none;
+            text-align: left;
+            background-color: rgb(255 191 191 / 55%);
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+
+        h3 {
+            display: inline-block;
+        }
+
+        #div1 {
+            display: inline-block;
+            margin-right: 5px;
+            margin-left: 5px;
+        }
+
+        #div2 {
+            margin-left: 5px;
+            margin-right: 5px;
+            display: inline-block;
+        }
+
+        body {
+            color: red;
+            background-color: rgb(132 214 255 / 85%);
+        }
+
+        #button {
+            float: none;
+            margin: 15px;
+        }
+
+        #output {
+            background-color: white;
+            float: none;
+            border-radius: 7.5px;
+            padding: 12.5px;
+            text-align: left;
+            border: 2.5px solid rgba(255, 43, 43, 0.7);
+            border-top: 25px solid rgba(255, 43, 43, 0.7);
+        }
+
+        span {
+            font-size: 20px;
+        }
+        label{
+            font-size: 20px;
+        }
+        #headDiv{
+            text-align: center;
+            border: 2.5px solid rgba(255, 43, 43, 0.7);
+            border-radius: 7.5px;
+            background-color: white;
+            float: none;
+            padding-top: 8px;
+            padding-bottom: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <center>
+        <div class="container">
+            <h1><u>The Math Quiz</u></h1>
+            <br>
+            <div id="headDiv" class="col-lg-3 col-md-4 col-sm-6 col-xs-9">
+                <label id="P1name"></label>&nbsp;<span id="P1score"></span>
+                <br>
+                <label id="P2name"></label>&nbsp;<span id="P2score"></span>
+            </div>
+            <br>
+            <div id="headDiv" class="col-lg-3 col-md-4 col-sm-6 col-xs-9">
+            <label id="qTurn"></label>
+            <br>
+            <label id="aTurn"></label>
+            </div>
+            <br>
+            <div id="output" class="col-lg-8 col-md-8 col-sm-6 col-xs-9"></div>
+            <br>
+            <div class="col-lg-4 col-md-5 col-sm-6 col-xs-10 div" id="div1">
+                <br>
+                <h5><u>Kindly type the first number below.</u></h5>
+                <br>
+                <input type="number" class="form-control input" placeholder="Type here..." id="N1">
+                <br>
+            </div>
+            <div class="col-lg-4 col-md-5 col-sm-6 col-xs-10 div" id="div2">
+                <br>
+                <h5><u>Kindly type the second number below.</u></h5>
+                <br>
+                <input type="number" class="form-control input" placeholder="Type here..." id="N2">
+                <br>
+            </div>
+            <br>
+            <button onclick="ask()" class="btn btn-danger col-lg-3 col-md-4 col-sm-6 col-xs-8" id="button">Ask</button>
+        </div>
+
+        <script>
+            scoreP1 = 0;
+            scoreP2 = 0;
+            qTurn = 'P1';
+            aTurn = 'P2';
+            Player1 = localStorage.getItem('Player 1');
+            Player2 = localStorage.getItem('Player 2');
+            document.getElementById('P1name').innerHTML = Player1 + ': ';
+            document.getElementById('P2name').innerHTML = Player2 + ': ';
+            document.getElementById('P1score').innerHTML = scoreP1;
+            document.getElementById('P2score').innerHTML = scoreP2;
+            document.getElementById('qTurn').innerHTML = 'Question Turn: ' + Player1;
+            document.getElementById('aTurn').innerHTML = 'Answer Turn: ' + Player2;
+            function ask(){
+                Number1 = Number(document.getElementById('N1').value);
+                Number2 = Number(document.getElementById('N2').value);
+                Answer = Number1 * Number2;
+
+                question = '<h4>Question: ' + Number1 + ' x ' + Number2 + ' =</h4>';
+                text = '<br> <input id="textInput" class="form-control" placeholder="Type the answer here...">';
+                button = '<br><br><button class="btn btn-danger" onclick="check()">Check</button>';
+                row = question + text + button;
+                document.getElementById('output').innerHTML = row;
+                document.getElementById('N1').value = '';
+                document.getElementById('N2').value = '';
+            }
+            function check(){
+                answer = document.getElementById('textInput').value;
+                if (answer == Answer){
+                    alert('You scored a point!');
+                    if (aTurn == 'P1'){
+                        scoreP1 = scoreP1 + 1;
+                        document.getElementById('P1score').innerHTML = scoreP1;
+                    } else {
+                        scoreP2 = scoreP2 + 1;
+                        document.getElementById('P2score').innerHTML = scoreP2;
+                    }
+                } else {
+                    alert('Oh no, the answer was ' + Answer + '.');
+                }
+
+                if (qTurn == 'P1'){
+                    qTurn = 'P2';
+                    document.getElementById('qTurn').innerHTML = 'Question Turn: ' + Player2;
+                } else {
+                    qTurn = 'P1';
+                    document.getElementById('qTurn').innerHTML = 'Question Turn: ' + Player1;
+                }
+                if (aTurn == 'P1'){
+                    aTurn = 'P2';
+                    document.getElementById('aTurn').innerHTML = 'Answer Turn: ' + Player2;
+                } else {
+                    aTurn = 'P1';
+                    document.getElementById('aTurn').innerHTML = 'Answer Turn: ' + Player1;
+                }
+                document.getElementById('output').innerHTML = "";
+            }
+        </script>
+    </center>
+</body>
+
+</html>

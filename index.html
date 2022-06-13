@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Ultimate Math Quiz</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <style>
+        #button{
+            float: none;
+        }
+        .div{
+            float: none;
+            text-align: left;
+            background-color: rgb(255 191 191 / 55%);
+            margin: 15px;
+            border-radius: 10px;
+        }
+        body{
+            color: red;
+            background-color: rgb(132 214 255 / 85%);
+        }
+        h1{
+            font-weight: 700;
+        }
+    </style>
+</head>
+
+<body>
+    <center>
+        <h1>Math Quiz</h1>
+        <div class="col-lg-4 col-md-5 col-sm-8 col-xs-10 div" id="div1">
+            <br>
+            <h5><u>Kindly type the username of the first player below.</u></h5>
+            <br>
+            <input type="text" class="form-control input" placeholder="Type here..." id="P1">
+            <br>
+        </div>
+        <div class="col-lg-4 col-md-5 col-sm-8 col-xs-10 div" id="div2">
+            <br>
+            <h5><u>Kindly type the username of the second player below.</u></h5>
+            <br>
+            <input type="text" class="form-control input" placeholder="Type here..." id="P2">
+            <br>
+        </div>
+        <button class="col-lg-4 col-md-5 col-sm-8 col-xs-10 btn btn-danger" id="button" onclick="addUser()">Log In</button>
+    </center>
+
+    <script>
+        function addUser(){
+            P1 = document.getElementById('P1').value;
+            P2 = document.getElementById('P2').value;
+            localStorage.setItem('Player 1', P1);
+            localStorage.setItem('Player 2', P2);
+            window.location = 'index2.html';
+        }
+    </script>
+</body>
+
+</html>
